@@ -1,0 +1,95 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Guía Profesional - Oracle VPS y PHP</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #2b1d0e;
+      color: #f5deb3;
+      margin: 0; padding: 0;
+    }
+    .container {
+      max-width: 960px;
+      margin: 40px auto;
+      background: #3e2a14;
+      padding: 40px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+      border-radius: 12px;
+    }
+    h1, h2 {
+      color: #d2b48c;
+    }
+    code {
+      background-color: #5c4033;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-family: Consolas, monospace;
+      color: #f5deb3;
+    }
+    pre {
+      background: #1e1e1e;
+      color: #f5deb3;
+      padding: 16px;
+      border-radius: 8px;
+      overflow-x: auto;
+    }
+    a {
+      color: #ffcc99;
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+    p {
+      font-size: 16px;
+      line-height: 1.6;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Guía Profesional: Configuración de VPS en Oracle Cloud con PHP y MySQL</h1>
+    <p>Bienvenido  a esta guía Basica completa sobre cómo configurar una cuenta en Oracle Cloud, conectarte a tu VPS, crear carpetas para alojar tu sitio web, utilizar herramientas como <code>netstat</code>, acceder a <strong>phpMyAdmin</strong>, practicar en <strong>OverTheWire</strong> y utilizar un script PHP para guardar datos en MySQL.</p>
+
+    <h2>1. Crear cuenta en Oracle Cloud</h2>
+    <p>Accede a <a href="https://cloud.oracle.com/">https://cloud.oracle.com/</a>, regístrate gratuitamente y crea una instancia desde la sección <strong>Compute Instances</strong>.</p>
+
+    <h2>2. Crear carpeta dentro de /var/www/html</h2>
+    <pre><code>ssh usuario@tu_ip_vps
+sudo mkdir -p /var/www/html/misitio
+sudo chown -R $USER:www-data /var/www/html/misitio</code></pre>
+
+    <h2>3. Verificar puertos abiertos con netstat</h2>
+    <pre><code>sudo netstat -tulpn</code></pre>
+
+    <h2>4. Acceder a phpMyAdmin</h2>
+    <p>Abre tu navegador y visita <code>http://tu_ip/phpmyadmin</code>. Ingresa tus credenciales para acceder a tu base de datos.</p>
+
+    <h2>5. Aprende en OverTheWire</h2>
+    <p>Fortalece tus conocimientos en comandos Linux y seguridad: <a href="https://overthewire.org/wargames/bandit/">OverTheWire - Bandit</a></p>
+
+    <h2>6. Código PHP para insertar datos en MySQL</h2>
+    <pre><code>&lt;?php
+$conexion = new mysqli("localhost", "usuario", "clave", "basedatos");
+if($conexion-&gt;connect_error){
+  die("Error: " . $conexion-&gt;connect_error);
+}
+$nombre = $_POST['nombre'];
+$correo = $_POST['correo'];
+$sql = "INSERT INTO registro (nombre, correo) VALUES ('$nombre', '$correo')";
+if($conexion-&gt;query($sql) === TRUE){
+  echo "Registro exitoso";
+}else{
+  echo "Error: " . $conexion-&gt;error;
+}
+$conexion-&gt;close();
+?&gt;</code></pre>
+
+    <p style="text-align:center; margin-top: 40px; font-size: 14px; color: #f5deb3;">Proyecto final elaborado por Kevs-28OR</p>
+  </div>
+</body>
+</html>
